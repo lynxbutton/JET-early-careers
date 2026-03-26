@@ -1,11 +1,17 @@
-# early-careers-JET
+# Lynx Button - JET Early Careers
+
+Hi I'm Lynx Button, I'm very excited about this opportunity and really hope you enjoy looking through this project!
+
+Note: Project TO-DO are mentioned as comments within the code, on the final commit I will add them here
 
 ### Running the Development Build:
 
 `npm run dev`
+Open your browser at http://localhost:3000/
+
 Please note that this project hasn't been setup for a production build.
 
-To change later:
+# To change later:
 
 The Problem
 We are looking for you to find restaurant data and return this in an interface of your

@@ -8,6 +8,16 @@
     <link rel="stylesheet" type="text/css" href="index.css" />
   </head>
   <body>
-    <script src="bundle.js" type="module"></script>
+    <form id="search">
+      <input
+        type="text"
+        id="postcodeInput"
+        placeholder="Press Enter..."
+        autocomplete="off"
+      />
+      <button type="submit">Submit</button>
+    </form>
+    <div id="app"></div>
+    <script type="module" src="/bundle.js"></script>
   </body>
 </html>
