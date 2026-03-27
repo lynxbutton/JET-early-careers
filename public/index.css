@@ -1,3 +1,65 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+/*Blanket styling*/
 body {
+  background-color: white;
+  font-family: "Montserrat", sans-serif;
   text-transform: capitalize;
+  margin: 0;
+}
+
+/*Search Banner --------------------------------------------------*/
+form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5em 1em 0.5em 1em;
+  background-color: #ff8000;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+/*Submit Button*/
+button {
+  display: inline-block;
+  padding: 1em 2em;
+  margin: auto 2em;
+  font-family: "Montserrat", sans-serif;
+  color: white;
+  background-color: #242e30;
+  border: 0;
+  border-radius: 2em;
+}
+button:hover {
+  background-color: white;
+  color: #242e30;
+}
+/*Input Parent ------------------------*/
+#searchBorder {
+  display: flex;
+  align-items: center;
+  padding: 0.4em 1em;
+  background-color: white;
+  border: 2px solid #ffffff00;
+  border-radius: 2em;
+}
+#searchBorder:focus-within {
+  border: 2px solid #242e30;
+}
+/*Magnifying glass*/
+img {
+  vertical-align: middle;
+  width: 1.5em;
+}
+/*Input Bar*/
+input {
+  display: inline-block;
+  padding: 0.2em 1em 0.2em 1em;
+  font-family: "Montserrat", sans-serif;
+  border: 0;
+  border-radius: 2em;
+  outline: none;
+}
+input:focus {
+  outline: none;
 }
