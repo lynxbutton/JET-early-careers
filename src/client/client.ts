@@ -1,4 +1,5 @@
 import { pingServer, fetchRestaurants } from "./api";
+import { Card } from "./cards";
 import { Restaurant } from "./types";
 /**
  * Starting point of the project
@@ -14,40 +15,30 @@ async function main() {
 
   //Wrapper for TS created elements
   const app = document.getElementById("app");
+
   //Form elements from DOM
   const form = document.getElementById("search") as HTMLFormElement;
   const input = document.getElementById("postcodeInput") as HTMLInputElement;
+  //Array to hold all cards
+  const cards = [];
 
   //Event listener that triggers after text submission
   //TO-DO: Move all this into separate functions/files to keep main() clear
   form.addEventListener("submit", async (event) => {
     //Allows for submit to be triggered via the enter button
     event.preventDefault();
-    //Get data from server for the 1- restaurants needed
+    //Get data from server for the 10 restaurants needed
     const restaurants: Restaurant[] = await fetchRestaurants(input?.value);
 
+    //Remove all children to 'reset' the search
+    //This is done after the await to prevent a flash of no text
+    app?.replaceChildren();
+
     //TO-DO: Improve this system, a class of cards would likely be useful
-    //TO-DO: Clear all cards when enter is pressed again so they don't pile up
-    const cards = [];
     for (const restaurant of restaurants) {
-      const { name, address, rating, cuisines } = restaurant;
-      const card = document.createElement("div");
-
-      const nameText = document.createElement("h2");
-      nameText.textContent = name;
-
-      const addressText = document.createElement("p");
-      addressText.textContent = `${address.firstLine}, ${address.city}, ${address.postalCode}`;
-
-      const ratingText = document.createElement("p");
-      ratingText.textContent = `${rating} out of 5`;
-
-      const cuisinesText = document.createElement("p");
-      cuisinesText.textContent = cuisines.join(", ");
-
-      card.append(nameText, addressText, ratingText, cuisinesText);
+      const card: Card = new Card(document, restaurant);
       cards.push(card);
-      app?.appendChild(card);
+      app?.appendChild(card.returnBody());
     }
   });
 }

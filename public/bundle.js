@@ -34,10 +34,60 @@ var init_api = __esm({
   }
 });
 
+// src/client/cards.ts
+var Card;
+var init_cards = __esm({
+  "src/client/cards.ts"() {
+    "use strict";
+    Card = class {
+      //HTML Elements
+      body;
+      name;
+      address;
+      rating;
+      cuisines;
+      /**
+       *
+       */
+      constructor(document2, restaurant) {
+        const { name, address, rating, cuisines } = restaurant;
+        this.body = document2.createElement("div");
+        this.name = this.createElement(document2, {
+          tag: "h1",
+          text: name
+        });
+        this.address = this.createElement(document2, {
+          tag: "p",
+          text: `${address.firstLine}, ${address.city}, ${address.postalCode}`
+        });
+        this.rating = this.createElement(document2, {
+          tag: "p",
+          text: `${rating} out of 5`
+        });
+        this.cuisines = this.createElement(document2, {
+          tag: "p",
+          text: cuisines.join(", ")
+        });
+        this.body.append(this.name, this.address, this.rating, this.cuisines);
+      }
+      returnBody() {
+        return this.body;
+      }
+      createElement(document2, options) {
+        const el = document2.createElement(options.tag);
+        if (options.id) el.id = options.id;
+        el.textContent = options.text;
+        return el;
+      }
+    };
+  }
+});
+
 // src/client/client.ts
 var require_client = __commonJS({
   "src/client/client.ts"() {
     init_api();
+    init_cards();
     async function main() {
       if (await pingServer() === false) {
         console.log("Server inaccessible, aborting...");
@@ -46,24 +96,15 @@ var require_client = __commonJS({
       const app = document.getElementById("app");
       const form = document.getElementById("search");
       const input = document.getElementById("postcodeInput");
+      const cards = [];
       form.addEventListener("submit", async (event) => {
         event.preventDefault();
         const restaurants = await fetchRestaurants(input?.value);
-        const cards = [];
+        app?.replaceChildren();
         for (const restaurant of restaurants) {
-          const { name, address, rating, cuisines } = restaurant;
-          const card = document.createElement("div");
-          const nameText = document.createElement("h2");
-          nameText.textContent = name;
-          const addressText = document.createElement("p");
-          addressText.textContent = `${address.firstLine}, ${address.city}, ${address.postalCode}`;
-          const ratingText = document.createElement("p");
-          ratingText.textContent = `${rating} out of 5`;
-          const cuisinesText = document.createElement("p");
-          cuisinesText.textContent = cuisines.join(", ");
-          card.append(nameText, addressText, ratingText, cuisinesText);
+          const card = new Card(document, restaurant);
           cards.push(card);
-          app?.appendChild(card);
+          app?.appendChild(card.returnBody());
         }
       });
     }
