@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans+Symbols+2&display=swap");
 
 /*Blanket styling*/
 body {
@@ -13,7 +14,7 @@ form {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0.5em 1em 0.5em 1em;
+  padding: 0.5rem 1rem 0.5rem 1rem;
   background-color: #ff8000;
   text-align: center;
   box-sizing: border-box;
@@ -22,13 +23,13 @@ form {
 /*Submit Button*/
 button {
   display: inline-block;
-  padding: 1em 2em;
-  margin: auto 2em;
+  padding: 1rem 2rem;
+  margin: auto 2rem;
   font-family: "Montserrat", sans-serif;
   color: white;
   background-color: #242e30;
   border: 0;
-  border-radius: 2em;
+  border-radius: 2rem;
 }
 button:hover {
   background-color: white;
@@ -38,28 +39,84 @@ button:hover {
 #searchBorder {
   display: flex;
   align-items: center;
-  padding: 0.4em 1em;
+  padding: 0.4rem 1rem;
+  max-width: 40%;
   background-color: white;
   border: 2px solid #ffffff00;
-  border-radius: 2em;
+  border-radius: 2rem;
 }
 #searchBorder:focus-within {
   border: 2px solid #242e30;
 }
 /*Magnifying glass*/
-img {
+#searchImg {
   vertical-align: middle;
-  width: 1.5em;
+  width: 1.5rem;
 }
 /*Input Bar*/
 input {
   display: inline-block;
-  padding: 0.2em 1em 0.2em 1em;
+  padding: 0.2rem 1rem 0.2rem 1rem;
+  max-width: 70%;
   font-family: "Montserrat", sans-serif;
   border: 0;
-  border-radius: 2em;
+  border-radius: 2rem;
   outline: none;
 }
 input:focus {
   outline: none;
+}
+
+/* Cards --------------------------------------------------*/
+#app {
+  width: fit-content;
+  max-width: 90vw;
+  margin-inline: auto;
+}
+#card {
+  margin: 1rem 0;
+  padding: 0.2rem 1.5rem;
+  border: 1px solid black;
+  border-radius: 2rem;
+}
+/*Rating*/
+#rating {
+  font-family: "Montserrat", sans-serif;
+} /*Half star isn't widely supported so a specific font is used*/
+#rating span {
+  font-family: "Noto Sans Symbols 2", sans-serif;
+  font-size: 1.5rem;
+}
+/*Logo & title*/
+#name-inline {
+  display: flex;
+  overflow: hidden;
+  align-items: center;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  font-size: 0.6rem;
+}
+#name-inline img {
+  flex-shrink: 0;
+  margin-right: 10px;
+  margin-top: 0.5rem;
+  max-width: 4rem;
+  vertical-align: middle;
+}
+/*Cuisine tags*/
+#cuisines {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+#cuisines li {
+  display: inline-block;
+  padding: 0.3rem 0.6rem;
+  margin: 0 0.1rem 0.8rem 0.1rem;
+  color: white;
+  text-align: center;
+  font-weight: 500;
+  font-style: italic;
+  background-color: #ff8000;
+  border-radius: 1rem;
 }

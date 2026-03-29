@@ -25,6 +25,7 @@ export interface Address {
  */
 export interface ElementOptions {
   tag: string;
-  text: string;
+  text?: string;
   id?: string;
+  src?: string;
 }

@@ -42,6 +42,7 @@ var init_cards = __esm({
     Card = class {
       //HTML Elements
       body;
+      logo;
       name;
       address;
       rating;
@@ -50,25 +51,61 @@ var init_cards = __esm({
        *
        */
       constructor(document2, restaurant) {
-        const { name, address, rating, cuisines } = restaurant;
-        this.body = document2.createElement("div");
+        const { name, address, rating, cuisines, logoUrl } = restaurant;
+        this.body = this.createElement(document2, {
+          tag: "div",
+          id: "card"
+        });
+        let nameInline = this.createElement(document2, {
+          tag: "span",
+          id: "name-inline"
+        });
+        this.logo = this.createElement(document2, {
+          tag: "img",
+          src: logoUrl
+        });
         this.name = this.createElement(document2, {
           tag: "h1",
           text: name
         });
+        nameInline.append(this.logo, this.name);
         this.address = this.createElement(document2, {
           tag: "p",
           text: `${address.firstLine}, ${address.city}, ${address.postalCode}`
         });
+        let starRank = "";
+        for (let i = 0; i < 5; i++) {
+          if (Math.floor(rating) > i) {
+            starRank += "\u2605";
+          } else if (rating - Math.floor(rating) > 0 && starRank[i - 1] === "\u2605") {
+            starRank += "\u2BEA";
+          } else {
+            starRank += "\u2606";
+          }
+        }
         this.rating = this.createElement(document2, {
           tag: "p",
-          text: `${rating} out of 5`
+          id: "rating",
+          text: `${rating}   `
         });
+        const star = this.createElement(document2, {
+          tag: "span",
+          text: `${starRank}`
+        });
+        this.rating.appendChild(star);
         this.cuisines = this.createElement(document2, {
-          tag: "p",
-          text: cuisines.join(", ")
+          tag: "ul",
+          id: "cuisines"
         });
-        this.body.append(this.name, this.address, this.rating, this.cuisines);
+        for (let i = 0; i < cuisines.length - 1; i++) {
+          this.cuisines.appendChild(
+            this.createElement(document2, {
+              tag: "li",
+              text: cuisines[i]
+            })
+          );
+        }
+        this.body.append(nameInline, this.address, this.rating, this.cuisines);
       }
       returnBody() {
         return this.body;
@@ -76,7 +113,8 @@ var init_cards = __esm({
       createElement(document2, options) {
         const el = document2.createElement(options.tag);
         if (options.id) el.id = options.id;
-        el.textContent = options.text;
+        if (options.src) el.src = options.src;
+        if (options.text) el.textContent = options.text;
         return el;
       }
     };
