@@ -73,6 +73,15 @@ input:focus {
   max-width: 90vw;
   margin-inline: auto;
 }
+/* Neaten up cards for landscape with a grid*/
+@media screen and (min-width: 768px) {
+  #app {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 1rem;
+  }
+}
+
 #card {
   margin: 1rem 0;
   padding: 0.2rem 1.5rem;
@@ -119,4 +128,16 @@ input:focus {
   font-style: italic;
   background-color: #ff8000;
   border-radius: 1rem;
+}
+
+/*Info and error text*/
+#info {
+  margin-top: 4rem;
+  font-size: 0.9rem;
+  font-style: italic;
+  text-align: center;
+  text-transform: none;
+  padding: 0.2rem 1.5rem;
+  border: 1px solid black;
+  border-radius: 2rem;
 }

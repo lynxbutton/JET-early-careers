@@ -107,8 +107,11 @@ var init_cards = __esm({
         }
         this.body.append(nameInline, this.address, this.rating, this.cuisines);
       }
-      returnBody() {
-        return this.body;
+      /**
+       *
+       */
+      attachBody(app) {
+        app?.appendChild(this.body);
       }
       createElement(document2, options) {
         const el = document2.createElement(options.tag);
@@ -127,11 +130,12 @@ var require_client = __commonJS({
     init_api();
     init_cards();
     async function main() {
+      const app = document.getElementById("app");
       if (await pingServer() === false) {
         console.log("Server inaccessible, aborting...");
+        generateErrorText(document, app);
         return;
       }
-      const app = document.getElementById("app");
       const form = document.getElementById("search");
       const input = document.getElementById("postcodeInput");
       const cards = [];
@@ -139,12 +143,23 @@ var require_client = __commonJS({
         event.preventDefault();
         const restaurants = await fetchRestaurants(input?.value);
         app?.replaceChildren();
+        if (restaurants.length === 0) {
+          generateErrorText(document, app);
+          return;
+        }
         for (const restaurant of restaurants) {
           const card = new Card(document, restaurant);
           cards.push(card);
-          app?.appendChild(card.returnBody());
+          card.attachBody(app);
         }
       });
+    }
+    function generateErrorText(document2, app) {
+      app?.replaceChildren();
+      const errorText = document2.createElement("p");
+      errorText.id = "info";
+      errorText.textContent = "An error has occurred, please enter a valid UK postcode or try again later.";
+      app?.appendChild(errorText);
     }
     main();
   }

@@ -1,5 +1,8 @@
 import { ElementOptions, Restaurant } from "./types";
 
+/**
+ * Represents all of a single restaurants basic data to the client
+ */
 export class Card {
   //HTML Elements
   private body: HTMLDivElement;
@@ -10,7 +13,9 @@ export class Card {
   private cuisines: HTMLParagraphElement;
 
   /**
-   *
+   * Constructor that uses all given restaurant data to generate and create HTML elements with this data
+   * @params Webpage document
+   * @params Restaurant Object
    */
   constructor(document: Document, restaurant: Restaurant) {
     const { name, address, rating, cuisines, logoUrl } = restaurant;
@@ -84,10 +89,24 @@ export class Card {
     this.body.append(nameInline, this.address, this.rating, this.cuisines);
   }
 
-  public returnBody() {
-    return this.body;
+  /**
+   * Appends the body of this class to the given element
+   * @params Parent element to attach to
+   */
+  public attachBody(app: HTMLElement | null) {
+    app?.appendChild(this.body);
   }
 
+  /**
+   * Creates a HTML element using the Element options interface
+   * In a bigger project this type of function would be part of a service or an exported function.
+   *    This would have been a better choice for this project as well as
+   *    there is error showing text in Client.ts that could've been created
+   *    within this function if it wasn't within this class.
+   * @params Webpage document
+   * @params Object of element options
+   * @returns void
+   */
   private createElement(document: Document, options: ElementOptions) {
     //Ideally this would be mapped with a HTMLElement Map to prevent unneeded casting
     const el = document.createElement(options.tag);
