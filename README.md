@@ -4,11 +4,11 @@ Hi I'm Lynx Button, I'm very excited about this opportunity and really hope you 
 
 ## Running the Development Build:
 
-Ensure node.js & git are installed on your computer.
-Clone the project then run the following commands:
-`npm i`
-`npm run dev`
-Open your browser at http://localhost:3000/
+- Ensure node.js & git are installed on your computer.
+- Clone the project then run the following commands:
+- `npm i`
+- `npm run dev`
+- Open your browser at http://localhost:3000/
 
 Please note that this project hasn't been setup for a production build.
 
@@ -38,7 +38,8 @@ Using the API provided you will need to send a postcode to return a set of data,
 need to filter this data to focus just on the restaurant data.
 You will notice that a lot of data is returned in the ‘restaurant objectʼ (and in the whole
 response!, weʼre only interested in the following pieces of data being returned:
-● Name
-● Cuisines
-● Rating - as a number
-● Address
+
+- Name
+- Cuisines
+- Rating - as a number
+- Address
